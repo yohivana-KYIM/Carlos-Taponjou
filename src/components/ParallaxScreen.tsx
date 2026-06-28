@@ -16,35 +16,34 @@ export default function ParallaxScreen() {
     offset: ["start end", "end start"],
   });
 
-  // Tilt forward like a receding screen, flatten in the middle, tilt back out
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [26, 0, -16]);
-  const y = useTransform(scrollYProgress, [0, 0.5, 1], [90, 0, -90]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.95]);
+  // Subtle tilt that settles flat in the middle of the viewport
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [9, 0, -5]);
+  const y = useTransform(scrollYProgress, [0, 0.5, 1], [28, 0, -28]);
   const opacity = useTransform(
     scrollYProgress,
-    [0, 0.25, 0.75, 1],
-    [0.2, 1, 1, 0.3],
+    [0, 0.2, 0.8, 1],
+    [0.55, 1, 1, 0.7],
   );
-  // Subtle parallax drift of the inner content
-  const contentY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  // Gentle parallax drift of the inner content
+  const contentY = useTransform(scrollYProgress, [0, 1], [10, -10]);
 
   return (
     <section
       data-scroll-section
       ref={ref}
-      className="relative my-40 overflow-hidden"
+      className="relative my-40"
       style={{ perspective: 1200 }}
     >
       <motion.div
-        style={{ rotateX, y, scale, opacity, skewY: -4, transformPerspective: 1200 }}
-        className="relative mx-[-1rem] origin-center rounded-2xl border border-white/10 bg-gradient-to-br from-primary/25 via-background/60 to-secondary/20 p-8 shadow-2xl shadow-primary/10 backdrop-blur-xl sm:mx-[-2rem] xl:mx-[-6rem] xl:p-16"
+        style={{ rotateX, y, opacity, skewY: -3, transformPerspective: 1200 }}
+        className="relative origin-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-primary/25 via-background/60 to-secondary/20 p-8 shadow-2xl shadow-primary/10 backdrop-blur-xl sm:p-12 xl:p-16"
       >
         {/* Glow accents */}
         <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-primary/30 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full bg-secondary/30 blur-3xl" />
 
         {/* Counter-skew so the content stays upright inside the parallelogram */}
-        <motion.div style={{ y: contentY, skewY: 4 }} className="relative">
+        <motion.div style={{ y: contentY, skewY: 3 }} className="relative">
           {/* Fake screen chrome */}
           <div className="mb-6 flex items-center gap-1.5">
             <span className="h-3 w-3 rounded-full bg-red-400/80" />
