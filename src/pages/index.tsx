@@ -31,6 +31,14 @@ import VanillaTilt from "vanilla-tilt";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import {
+  fadeUp,
+  scaleIn,
+  fadeSide,
+  staggerContainer,
+  staggerFast,
+  viewport,
+} from "@/lib/animations";
 
 const CV_PATH = "/cv-carlos-taponjou.pdf";
 
@@ -45,14 +53,6 @@ const experienceTech = [
   ["Microsoft Azure", "SSIS", "SSAS", "Power BI", "SQL", "Git"],
   ["Microsoft Azure", "SSIS", "SSAS", "Power BI", "Python", "R"],
 ];
-
-// Reusable scroll-reveal animation
-const reveal = {
-  initial: { opacity: 0, y: 40 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
-};
 
 export default function Home() {
   const refScrollContainer = useRef(null);
@@ -236,23 +236,29 @@ export default function Home() {
         {/* About */}
         <section id="about" data-scroll-section>
           <motion.div
-            {...reveal}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
             className="my-32 flex max-w-6xl flex-col justify-start space-y-10"
           >
-            <h2 className="py-16  pb-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]">
+            <motion.h2
+              variants={fadeUp}
+              className="py-16  pb-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]"
+            >
               {t.about.paragraph}
-            </h2>
-            <div className="grid grid-cols-2 gap-8 xl:grid-cols-3">
-              {t.about.stats.map((stat, i) => (
+            </motion.h2>
+            <motion.div
+              variants={staggerContainer}
+              className="grid grid-cols-2 gap-8 xl:grid-cols-3"
+            >
+              {t.about.stats.map((stat) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.12 }}
+                  variants={fadeUp}
                   className="flex flex-col items-center text-center xl:items-start xl:text-start"
                 >
                   <AnimatedCounter
@@ -264,37 +270,51 @@ export default function Home() {
                   </span>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         </section>
 
         {/* Compétences */}
         <section id="skills" data-scroll-section>
           <motion.div
-            {...reveal}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
             className="my-32 flex flex-col justify-start space-y-10"
           >
-            <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+            <motion.span
+              variants={fadeUp}
+              className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter"
+            >
               {t.skills.tag}
-            </span>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tighter xl:text-6xl">
+            </motion.span>
+            <motion.h2
+              variants={fadeUp}
+              className="mt-3 text-4xl font-semibold tracking-tighter xl:text-6xl"
+            >
               {t.skills.title}
-            </h2>
-            <p className="-mt-4 max-w-2xl text-base tracking-tight text-muted-foreground xl:text-lg">
+            </motion.h2>
+            <motion.p
+              variants={fadeUp}
+              className="-mt-4 max-w-2xl text-base tracking-tight text-muted-foreground xl:text-lg"
+            >
               {t.skills.subtitle}
-            </p>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {t.skills.items.map((skill, i) => (
+            </motion.p>
+            <motion.div
+              variants={staggerFast}
+              className="grid grid-cols-1 gap-4 md:grid-cols-2"
+            >
+              {t.skills.items.map((skill) => (
                 <motion.div
                   key={skill.category}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.4, delay: (i % 2) * 0.08 }}
-                  className="flex flex-col rounded-md bg-white/5 p-6 shadow-md backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white/10"
+                  variants={fadeUp}
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                  className="flex flex-col rounded-md bg-white/5 p-6 shadow-md backdrop-blur hover:bg-white/10"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-lg tracking-tight text-foreground">
@@ -310,7 +330,7 @@ export default function Home() {
                   </span>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         </section>
 
@@ -331,19 +351,36 @@ export default function Home() {
               />
             </div>
           </div>
-          <motion.div {...reveal} data-scroll data-scroll-speed=".4" className="my-64">
-            <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+            data-scroll
+            data-scroll-speed=".4"
+            className="my-64"
+          >
+            <motion.span
+              variants={fadeUp}
+              className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter"
+            >
               {t.experience.tag}
-            </span>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
+            </motion.span>
+            <motion.h2
+              variants={fadeUp}
+              className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl"
+            >
               {t.experience.title}
-            </h2>
-            <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
+            </motion.h2>
+            <motion.p
+              variants={fadeUp}
+              className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg"
+            >
               {t.experience.subtitle}
-            </p>
+            </motion.p>
 
             {/* Carousel */}
-            <div className="mt-14">
+            <motion.div variants={fadeUp} className="mt-14">
               <Carousel setApi={setCarouselApi} className="w-full">
                 <CarouselContent>
                   {t.experience.items.map((exp, i) => (
@@ -391,7 +428,7 @@ export default function Home() {
                 </span>{" "}
                 {t.experience.counter}
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </section>
 
@@ -404,38 +441,43 @@ export default function Home() {
             className="my-32 flex flex-col justify-start space-y-10"
           >
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.7,
-                staggerChildren: 0.15,
-              }}
-              viewport={{ once: true, margin: "-60px" }}
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
               className="grid items-center gap-1.5 md:grid-cols-2 xl:grid-cols-3"
             >
-              <div className="flex flex-col py-6 xl:p-6">
+              <motion.div variants={fadeUp} className="flex flex-col py-6 xl:p-6">
                 <h2 className="text-4xl font-medium tracking-tight">
                   {t.domains.title}
                 </h2>
                 <p className="mt-2 tracking-tighter text-secondary-foreground">
                   {t.domains.subtitle}
                 </p>
-              </div>
+              </motion.div>
               {t.domains.items.map((domain, i) => {
                 const Icon = domainIcons[i] ?? Cloud;
                 return (
-                  <div
+                  <motion.div
                     key={domain.service}
-                    className="flex flex-col items-start rounded-md bg-white/5 p-14 shadow-md backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-md"
+                    variants={scaleIn}
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                    className="flex flex-col items-start rounded-md bg-white/5 p-14 shadow-md backdrop-blur hover:bg-white/10 hover:shadow-md"
                   >
-                    <Icon className="my-6 text-primary" size={20} />
+                    <motion.div
+                      whileHover={{ rotate: -8, scale: 1.15 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                    >
+                      <Icon className="my-6 text-primary" size={20} />
+                    </motion.div>
                     <span className="text-lg tracking-tight text-foreground">
                       {domain.service}
                     </span>
                     <span className="mt-2 tracking-tighter text-muted-foreground">
                       {domain.description}
                     </span>
-                  </div>
+                  </motion.div>
                 );
               })}
             </motion.div>
@@ -445,23 +487,29 @@ export default function Home() {
         {/* Formation & Certifications */}
         <section id="education" data-scroll-section>
           <motion.div
-            {...reveal}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
             className="my-32 flex flex-col justify-start space-y-10"
           >
-            <div>
+            <motion.div variants={fadeUp}>
               <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
                 {t.education.tag}
               </span>
               <h2 className="mt-3 text-4xl font-semibold tracking-tighter xl:text-6xl">
                 {t.education.title}
               </h2>
-            </div>
+            </motion.div>
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               {/* Formation */}
-              <div className="flex flex-col space-y-4">
+              <motion.div
+                variants={fadeSide("left")}
+                className="flex flex-col space-y-4"
+              >
                 <div className="flex items-center space-x-2">
                   <GraduationCap className="text-primary" size={20} />
                   <span className="text-lg font-medium tracking-tight">
@@ -469,9 +517,11 @@ export default function Home() {
                   </span>
                 </div>
                 {t.education.items.map((item) => (
-                  <div
+                  <motion.div
                     key={item.title}
-                    className="rounded-md bg-white/5 p-6 shadow-md backdrop-blur transition duration-300 hover:bg-white/10"
+                    whileHover={{ y: -3 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                    className="rounded-md bg-white/5 p-6 shadow-md backdrop-blur hover:bg-white/10"
                   >
                     <span className="tracking-tight text-foreground">
                       {item.title}
@@ -479,29 +529,40 @@ export default function Home() {
                     <p className="mt-1 text-sm text-muted-foreground">
                       {item.place}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
               {/* Certifications */}
-              <div className="flex flex-col space-y-4">
+              <motion.div
+                variants={fadeSide("right")}
+                className="flex flex-col space-y-4"
+              >
                 <div className="flex items-center space-x-2">
                   <Award className="text-primary" size={20} />
                   <span className="text-lg font-medium tracking-tight">
                     {t.education.certifications}
                   </span>
                 </div>
-                <ul className="space-y-2">
+                <motion.ul
+                  variants={staggerFast}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={viewport}
+                  className="space-y-2"
+                >
                   {t.education.certs.map((cert) => (
-                    <li
+                    <motion.li
                       key={cert}
-                      className="flex items-start rounded-md bg-white/5 px-4 py-3 text-sm tracking-tight text-muted-foreground backdrop-blur transition duration-300 hover:bg-white/10"
+                      variants={fadeUp}
+                      whileHover={{ x: 4 }}
+                      className="flex items-start rounded-md bg-white/5 px-4 py-3 text-sm tracking-tight text-muted-foreground backdrop-blur hover:bg-white/10"
                     >
                       <ChevronRight className="mr-2 mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       {cert}
-                    </li>
+                    </motion.li>
                   ))}
-                </ul>
-              </div>
+                </motion.ul>
+              </motion.div>
             </div>
           </motion.div>
         </section>
@@ -509,7 +570,10 @@ export default function Home() {
         {/* Contact */}
         <section id="contact" data-scroll-section className="my-64">
           <motion.div
-            {...reveal}
+            variants={scaleIn}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
@@ -526,13 +590,17 @@ export default function Home() {
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
               <Link href="mailto:taponjoucarlos@gmail.com" passHref>
-                <Button>{t.contact.button}</Button>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+                  <Button>{t.contact.button}</Button>
+                </motion.div>
               </Link>
               <a href={CV_PATH} download="CV-Carlos-Gael-Taponjou-Kenfack.pdf">
-                <Button variant="outline">
-                  <Download className="mr-1.5 h-4 w-4" />
-                  {t.hero.downloadCv}
-                </Button>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+                  <Button variant="outline">
+                    <Download className="mr-1.5 h-4 w-4" />
+                    {t.hero.downloadCv}
+                  </Button>
+                </motion.div>
               </a>
             </div>
           </motion.div>
