@@ -189,9 +189,9 @@ export default function Container(props: ContainerProps) {
           <Image
             src="/carlos.jpeg"
             alt="Carlos Gael"
-            width={40}
-            height={40}
-            className="rounded-full object-cover"
+            width={56}
+            height={56}
+            className="h-14 w-14 rounded-full object-cover"
             priority
           />
         </Link>
