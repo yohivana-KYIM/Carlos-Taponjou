@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import FloatingButtons from "@/components/FloatingButtons";
+import SkyBackground from "@/components/SkyBackground";
 import { useLanguage } from "@/lib/i18n";
 import styles from "@/styles/Container.module.css";
 
@@ -138,6 +139,7 @@ export default function Container(props: ContainerProps) {
 
   return (
     <>
+      <SkyBackground />
       <Head>
         <title>{meta.title}</title>
         <meta name="robots" content="follow, index" />
