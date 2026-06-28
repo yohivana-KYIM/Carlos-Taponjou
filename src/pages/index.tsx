@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { TriangleDownIcon } from "@radix-ui/react-icons";
 import DataVisual from "@/components/DataVisual";
+import Image from "next/image";
 import Link from "next/link";
 import { cn, scrollTo } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -218,9 +219,17 @@ export default function Home() {
             data-scroll
             data-scroll-speed="-.01"
             id={styles["canvas-container"]}
-            className="mt-14 h-full w-full xl:mt-0"
+            className="mt-14 flex h-full w-full flex-col items-center gap-6 xl:mt-0 xl:flex-row xl:justify-center"
           >
             <DataVisual />
+            <Image
+              src="/ia.png"
+              alt="Intelligence Artificielle"
+              width={300}
+              height={300}
+              className="h-auto w-full max-w-[300px] rounded-xl object-contain shadow-lg"
+              priority
+            />
           </div>
         </section>
 
