@@ -1,60 +1,100 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, animate, useInView } from "framer-motion";
+import { motion, animate } from "framer-motion";
 import { BarChart3, TrendingUp, Database, Activity } from "lucide-react";
 
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-// Animated number that counts up when in view
-function Counter({
-  to,
-  suffix = "",
+const rnd = (min: number, max: number) =>
+  Math.round(min + Math.random() * (max - min));
+
+// Live number that smoothly animates whenever its value changes
+function LiveNumber({
+  value,
   decimals = 0,
+  suffix = "",
 }: {
-  to: number;
-  suffix?: string;
+  value: number;
   decimals?: number;
+  suffix?: string;
 }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
-  const [value, setValue] = useState(0);
+  const [display, setDisplay] = useState(0);
+  const prev = useRef(0);
 
   useEffect(() => {
-    if (!inView) return;
-    const controls = animate(0, to, {
-      duration: 1.6,
+    const controls = animate(prev.current, value, {
+      duration: 0.9,
       ease,
-      onUpdate: (v) => setValue(v),
+      onUpdate: (v) => setDisplay(v),
     });
+    prev.current = value;
     return () => controls.stop();
-  }, [inView, to]);
+  }, [value]);
 
   return (
-    <span ref={ref}>
-      {value.toFixed(decimals)}
+    <>
+      {display.toFixed(decimals)}
       {suffix}
-    </span>
+    </>
   );
 }
 
-const bars = [42, 68, 55, 82, 60, 95, 74, 88];
+const CHART_W = 300;
+const CHART_H = 110;
+const LINE_POINTS = 8;
+
+// Build an SVG line path from an array of values (0–100)
+function buildLine(values: number[]) {
+  return values
+    .map((v, i) => {
+      const x = (i * CHART_W) / (values.length - 1);
+      const y = CHART_H - 5 - (v / 100) * (CHART_H - 15);
+      return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
+    })
+    .join(" ");
+}
+
 const months = ["J", "F", "M", "A", "M", "J", "J", "A"];
 
-// Area chart path (viewBox 0 0 300 110)
-const linePath =
-  "M0,90 L40,70 L80,78 L120,48 L160,58 L200,30 L240,40 L300,14";
-const areaPath = `${linePath} L300,110 L0,110 Z`;
-
 export default function DataVisual() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-  const donut = 0.72; // 72%
+  const [bars, setBars] = useState([42, 68, 55, 82, 60, 95, 74, 88]);
+  const [line, setLine] = useState([30, 48, 40, 70, 58, 82, 72, 90]);
+  const [donut, setDonut] = useState(72);
+  const [kpis, setKpis] = useState({ datasets: 128, growth: 24, accuracy: 98 });
+
+  // Live, automatic updates
+  useEffect(() => {
+    const barTimer = setInterval(() => {
+      setBars((b) => b.map(() => rnd(30, 100)));
+    }, 1800);
+
+    const lineTimer = setInterval(() => {
+      setLine((l) => [...l.slice(1), rnd(20, 95)]);
+    }, 2000);
+
+    const donutTimer = setInterval(() => setDonut(rnd(58, 92)), 2600);
+
+    const kpiTimer = setInterval(() => {
+      setKpis({
+        datasets: rnd(110, 160),
+        growth: rnd(12, 38),
+        accuracy: rnd(94, 99),
+      });
+    }, 2200);
+
+    return () => {
+      clearInterval(barTimer);
+      clearInterval(lineTimer);
+      clearInterval(donutTimer);
+      clearInterval(kpiTimer);
+    };
+  }, []);
+
   const circumference = 2 * Math.PI * 38;
+  const linePath = buildLine(line);
+  const areaPath = `${linePath} L${CHART_W},${CHART_H} L0,${CHART_H} Z`;
 
   return (
-    <div
-      ref={ref}
-      className="relative flex h-full w-full flex-col gap-3 overflow-hidden p-5"
-    >
+    <div className="relative flex h-full w-full flex-col gap-3 overflow-hidden p-5">
       {/* Animated grid background */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.15]"
@@ -72,12 +112,7 @@ export default function DataVisual() {
       <div className="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-secondary/20 blur-3xl" />
 
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, ease }}
-        className="relative flex items-center justify-between"
-      >
+      <div className="relative flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/15 text-primary">
             <Activity className="h-4 w-4" />
@@ -90,50 +125,42 @@ export default function DataVisual() {
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
           live
         </span>
-      </motion.div>
+      </div>
 
       {/* KPI row */}
       <div className="relative grid grid-cols-3 gap-2">
         {[
-          { icon: Database, label: "Datasets", to: 128, suffix: "" },
-          { icon: TrendingUp, label: "Growth", to: 24, suffix: "%" },
-          { icon: BarChart3, label: "Accuracy", to: 98, suffix: "%" },
-        ].map((kpi, i) => (
-          <motion.div
+          { icon: Database, label: "Datasets", value: kpis.datasets, suffix: "" },
+          { icon: TrendingUp, label: "Growth", value: kpis.growth, suffix: "%" },
+          { icon: BarChart3, label: "Accuracy", value: kpis.accuracy, suffix: "%" },
+        ].map((kpi) => (
+          <div
             key={kpi.label}
-            initial={{ opacity: 0, y: 12 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease }}
             className="rounded-lg border border-white/5 bg-white/[0.03] p-2.5 backdrop-blur"
           >
             <kpi.icon className="mb-1 h-3.5 w-3.5 text-primary" />
             <div className="clash-grotesk text-lg font-semibold tracking-tight text-foreground">
-              <Counter to={kpi.to} suffix={kpi.suffix} />
+              <LiveNumber value={kpi.value} suffix={kpi.suffix} />
             </div>
             <div className="text-[10px] tracking-tight text-muted-foreground">
               {kpi.label}
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
       {/* Area chart */}
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, delay: 0.3, ease }}
-        className="relative flex-1 rounded-lg border border-white/5 bg-white/[0.03] p-3 backdrop-blur"
-      >
+      <div className="relative flex-1 rounded-lg border border-white/5 bg-white/[0.03] p-3 backdrop-blur">
         <div className="mb-1 flex items-center justify-between">
           <span className="text-[10px] tracking-tight text-muted-foreground">
             Revenue trend
           </span>
           <span className="clash-grotesk text-gradient text-xs font-semibold">
-            ↑ 32%
+            ↑ <LiveNumber value={kpis.growth + 8} suffix="%" />
           </span>
         </div>
         <svg
-          viewBox="0 0 300 110"
+          viewBox={`0 0 ${CHART_W} ${CHART_H}`}
           preserveAspectRatio="none"
           className="h-[calc(100%-18px)] w-full"
         >
@@ -146,9 +173,8 @@ export default function DataVisual() {
           <motion.path
             d={areaPath}
             fill="url(#areaFill)"
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 1, delay: 0.9 }}
+            animate={{ d: areaPath }}
+            transition={{ duration: 0.9, ease }}
           />
           <motion.path
             d={linePath}
@@ -157,22 +183,26 @@ export default function DataVisual() {
             strokeWidth={2.5}
             strokeLinecap="round"
             strokeLinejoin="round"
-            initial={{ pathLength: 0 }}
-            animate={inView ? { pathLength: 1 } : {}}
-            transition={{ duration: 1.4, delay: 0.4, ease }}
+            animate={{ d: linePath }}
+            transition={{ duration: 0.9, ease }}
+          />
+          {/* Leading dot */}
+          <motion.circle
+            r="3.5"
+            fill="hsl(var(--primary))"
+            animate={{
+              cx: CHART_W,
+              cy: CHART_H - 5 - ((line[line.length - 1] ?? 0) / 100) * (CHART_H - 15),
+            }}
+            transition={{ duration: 0.9, ease }}
           />
         </svg>
-      </motion.div>
+      </div>
 
       {/* Bottom row: bars + donut */}
       <div className="relative grid grid-cols-[1.6fr_1fr] gap-2">
         {/* Bar chart */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4, ease }}
-          className="rounded-lg border border-white/5 bg-white/[0.03] p-3 backdrop-blur"
-        >
+        <div className="rounded-lg border border-white/5 bg-white/[0.03] p-3 backdrop-blur">
           <span className="mb-2 block text-[10px] tracking-tight text-muted-foreground">
             Monthly volume
           </span>
@@ -181,9 +211,8 @@ export default function DataVisual() {
               <div key={i} className="flex flex-1 flex-col items-center gap-1">
                 <motion.div
                   className="w-full rounded-sm bg-gradient-to-t from-primary/40 to-primary"
-                  initial={{ height: 0 }}
-                  animate={inView ? { height: `${h}%` } : {}}
-                  transition={{ duration: 0.8, delay: 0.5 + i * 0.07, ease }}
+                  animate={{ height: `${h}%` }}
+                  transition={{ duration: 0.8, ease }}
                 />
                 <span className="text-[8px] text-muted-foreground">
                   {months[i]}
@@ -191,15 +220,10 @@ export default function DataVisual() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Donut */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5, ease }}
-          className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-white/[0.03] p-3 backdrop-blur"
-        >
+        <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-white/[0.03] p-3 backdrop-blur">
           <div className="relative h-[70px] w-[70px]">
             <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
               <circle
@@ -220,25 +244,20 @@ export default function DataVisual() {
                 strokeWidth="9"
                 strokeLinecap="round"
                 strokeDasharray={circumference}
-                initial={{ strokeDashoffset: circumference }}
-                animate={
-                  inView
-                    ? { strokeDashoffset: circumference * (1 - donut) }
-                    : {}
-                }
-                transition={{ duration: 1.4, delay: 0.7, ease }}
+                animate={{ strokeDashoffset: circumference * (1 - donut / 100) }}
+                transition={{ duration: 0.9, ease }}
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="clash-grotesk text-sm font-semibold text-foreground">
-                <Counter to={72} suffix="%" />
+                <LiveNumber value={donut} suffix="%" />
               </span>
             </div>
           </div>
           <span className="mt-1 text-[10px] tracking-tight text-muted-foreground">
             KPIs met
           </span>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
