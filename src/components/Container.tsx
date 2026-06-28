@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn, scrollTo } from "@/lib/utils";
@@ -185,7 +186,14 @@ export default function Container(props: ContainerProps) {
           </button>
         </div>
         <Link href="/">
-          <span className="text-lg font-semibold">Carlos Gael</span>
+          <Image
+            src="/carlos.jpeg"
+            alt="Carlos Gael"
+            width={40}
+            height={40}
+            className="rounded-full object-cover"
+            priority
+          />
         </Link>
 
         {/* Desktop menu */}
