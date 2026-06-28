@@ -40,6 +40,7 @@ export type Dict = {
     counter: string;
     items: Experience[];
   };
+  showcase: { kicker: string; title: string; subtitle: string };
   domains: { title: ReactNode; subtitle: string; items: Domain[] };
   education: {
     tag: string;
@@ -133,6 +134,12 @@ export const translations: Record<Lang, Dict> = {
         { role: "Analyste de données", company: "INTERSOS", period: "Sep. 2019 – Fév. 2022 · 31 mois", location: "Cameroun", project: "Assistance aux personnes victimes de catastrophes et de conflits armés (OCHA, ECHO)" },
         { role: "Analyste de données", company: "Ministère de l'Élevage et de l'Agriculture", period: "Oct. 2016 – Fév. 2019 · 29 mois", location: "Cameroun", project: "Recensement Général de l'Agriculture et de l'Élevage (RGAE)" },
       ],
+    },
+    showcase: {
+      kicker: "Data → Décision",
+      title: "Transformer la donnée en décision.",
+      subtitle:
+        "De la collecte à la visualisation, des pipelines fiables et automatisés qui font parler vos données et éclairent chaque décision.",
     },
     domains: {
       title: (
@@ -248,6 +255,12 @@ export const translations: Record<Lang, Dict> = {
         { role: "Data Analyst", company: "INTERSOS", period: "Sep. 2019 – Feb. 2022 · 31 months", location: "Cameroon", project: "Assistance to people affected by disasters and armed conflicts (OCHA, ECHO)" },
         { role: "Data Analyst", company: "Ministry of Livestock and Agriculture", period: "Oct. 2016 – Feb. 2019 · 29 months", location: "Cameroon", project: "General Census of Agriculture and Livestock (RGAE)" },
       ],
+    },
+    showcase: {
+      kicker: "Data → Decision",
+      title: "Turning data into decisions.",
+      subtitle:
+        "From ingestion to visualization, reliable automated pipelines that make your data speak and inform every decision.",
     },
     domains: {
       title: (

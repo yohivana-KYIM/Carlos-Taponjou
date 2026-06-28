@@ -31,6 +31,7 @@ import VanillaTilt from "vanilla-tilt";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import ParallaxScreen from "@/components/ParallaxScreen";
 import {
   fadeUp,
   scaleIn,
@@ -333,6 +334,9 @@ export default function Home() {
             </motion.div>
           </motion.div>
         </section>
+
+        {/* Parallax parallelogram showcase */}
+        <ParallaxScreen />
 
         {/* Expériences */}
         <section id="experience" data-scroll-section>
