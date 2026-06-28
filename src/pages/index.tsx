@@ -140,16 +140,6 @@ export default function Home() {
           className="mt-40 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
         >
           <div className={styles.intro}>
-            <div
-              data-scroll
-              data-scroll-direction="horizontal"
-              data-scroll-speed=".09"
-              className="flex flex-row items-center space-x-1.5"
-            >
-              <span className={styles.pill}>power bi</span>
-              <span className={styles.pill}>azure</span>
-              <span className={styles.pill}>python</span>
-            </div>
             <div>
               <h1
                 data-scroll

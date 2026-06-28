@@ -167,7 +167,7 @@ export const translations: Record<Lang, Dict> = {
       formation: "Formation",
       certifications: "Certifications",
       items: [
-        { title: "Certificat en Science des données — En cours", place: "Université du Québec (TÉLUQ)" },
+        { title: "Certificat en Science des données", place: "Université du Québec (TÉLUQ)" },
         { title: "Maîtrise en Informatique Appliquée aux Systèmes d'Information Géographique", place: "Université de Douala" },
       ],
       certs: certifications,
@@ -288,7 +288,7 @@ export const translations: Record<Lang, Dict> = {
       formation: "Education",
       certifications: "Certifications",
       items: [
-        { title: "Data Science Certificate — In progress", place: "University of Quebec (TÉLUQ)" },
+        { title: "Data Science Certificate", place: "University of Quebec (TÉLUQ)" },
         { title: "Master's in Computer Science Applied to Geographic Information Systems", place: "University of Douala" },
       ],
       certs: certifications,
