@@ -40,7 +40,6 @@ function LiveNumber({
 
 const CHART_W = 300;
 const CHART_H = 110;
-const LINE_POINTS = 8;
 
 // Build an SVG line path from an array of values (0–100)
 function buildLine(values: number[]) {
