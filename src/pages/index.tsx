@@ -15,6 +15,11 @@ import {
   FileText,
   Github,
   Linkedin,
+  Code2,
+  Warehouse,
+  Layers,
+  ClipboardList,
+  GitBranch,
 } from "lucide-react";
 import { TriangleDownIcon } from "@radix-ui/react-icons";
 import DataVisual from "@/components/DataVisual";
@@ -48,6 +53,20 @@ const CV_PATH = "/cv-carlos-taponjou.pdf";
 
 // Icons paired by index with translations.domains.items
 const domainIcons = [Cloud, Database, BrainCircuit, BarChart3, Workflow];
+
+// Icons paired by index with translations.skills.items
+const skillIcons = [
+  BarChart3, // Business Intelligence
+  BrainCircuit, // Machine Learning / IA
+  Workflow, // ETL / ELT
+  Cloud, // Cloud
+  Code2, // Programming languages
+  Database, // Databases
+  Warehouse, // Data warehousing
+  Layers, // Big Data
+  ClipboardList, // Modeling & frameworks
+  GitBranch, // Version control
+];
 
 // Technologies paired by index with translations.experience.items
 const experienceTech = [
@@ -337,28 +356,45 @@ export default function Home() {
               variants={staggerFast}
               className="grid grid-cols-1 gap-4 md:grid-cols-2"
             >
-              {t.skills.items.map((skill) => (
-                <motion.div
-                  key={skill.category}
-                  variants={fadeUp}
-                  whileHover={{ y: -4, scale: 1.01 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                  className="flex flex-col rounded-md bg-black/[0.04] p-6 shadow-md backdrop-blur hover:bg-black/[0.07]"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg tracking-tight text-foreground">
-                      {skill.category}
-                    </span>
-                    <AnimatedCounter
-                      value={skill.years}
-                      className="clash-grotesk text-gradient text-sm font-semibold"
-                    />
-                  </div>
-                  <span className="mt-2 tracking-tighter text-muted-foreground">
-                    {skill.items}
-                  </span>
-                </motion.div>
-              ))}
+              {t.skills.items.map((skill, i) => {
+                const Icon = skillIcons[i] ?? BarChart3;
+                const tools = skill.items.split(/,\s*|\s+et\s+|\s+and\s+/);
+                return (
+                  <motion.div
+                    key={skill.category}
+                    variants={fadeUp}
+                    whileHover={{ y: -4, scale: 1.01 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                    className="flex flex-col rounded-md bg-black/[0.04] p-6 shadow-md backdrop-blur hover:bg-black/[0.07]"
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-foreground/[0.06] text-foreground">
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <span className="text-lg tracking-tight text-foreground">
+                          {skill.category}
+                        </span>
+                      </div>
+                      <AnimatedCounter
+                        value={skill.years}
+                        className="clash-grotesk text-gradient shrink-0 text-sm font-semibold"
+                      />
+                    </div>
+                    <ul className="mt-4 space-y-1.5">
+                      {tools.map((tool) => (
+                        <li
+                          key={tool}
+                          className="flex items-start gap-2 text-sm tracking-tight text-muted-foreground"
+                        >
+                          <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-foreground/40" />
+                          {tool}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </motion.div>
         </section>
