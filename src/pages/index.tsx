@@ -472,10 +472,21 @@ export default function Home() {
                           </span>
                         </CardHeader>
                         <CardContent className="p-6">
-                          <p className="text-sm tracking-tight text-foreground">
+                          <p className="text-sm font-medium tracking-tight text-foreground">
                             {exp.project}
                           </p>
-                          <div className="mt-4 flex flex-wrap gap-1.5">
+                          <ul className="mt-4 space-y-2">
+                            {exp.highlights.map((h) => (
+                              <li
+                                key={h}
+                                className="flex items-start gap-2 text-sm leading-snug tracking-tight text-muted-foreground"
+                              >
+                                <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60" />
+                                {h}
+                              </li>
+                            ))}
+                          </ul>
+                          <div className="mt-4 flex flex-wrap gap-1.5 border-t border-foreground/10 pt-4">
                             {experienceTech[i]?.map((tech) => (
                               <span
                                 key={tech}
