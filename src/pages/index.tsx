@@ -438,7 +438,7 @@ export default function Home() {
 
             {/* Mandats Grid */}
             <motion.div variants={fadeUp} className="mt-14">
-              <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-max">
+              <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 auto-rows-max">
                 {t.experience.items.map((exp, i) => {
                   const hasPowerBI = experienceTech[i]?.includes("Power BI");
                   const hasML = experienceTech[i]?.some(t => ["Python", "R", "Machine Learning", "IA"].some(ml => t.includes(ml)));
