@@ -93,35 +93,35 @@ export default function DataVisual() {
   const areaPath = `${linePath} L${CHART_W},${CHART_H} L0,${CHART_H} Z`;
 
   return (
-    <div className="relative flex h-full min-h-[650px] w-full flex-col gap-4 overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-background via-black/[0.02] to-background p-8 shadow-xl backdrop-blur-sm">
+    <div className="relative flex h-full min-h-[650px] w-full flex-col gap-4 overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-background via-primary/5 to-background p-8 shadow-2xl backdrop-blur-sm">
       {/* Animated grid background */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.08]"
+        className="pointer-events-none absolute inset-0 opacity-[0.12]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, hsl(var(--primary)/0.4) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--primary)/0.4) 1px, transparent 1px)",
+            "linear-gradient(to right, hsl(var(--primary)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--primary)) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
           maskImage:
             "radial-gradient(ellipse at center, black 40%, transparent 80%)",
         }}
       />
 
-      {/* Floating glow */}
-      <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/15 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-secondary/15 blur-3xl" />
+      {/* Floating glow - more visible */}
+      <div className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-primary/25 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-secondary/25 blur-3xl" />
 
       {/* Header */}
       <div className="relative flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 text-primary">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary/30 to-primary/15 text-primary border border-primary/20">
             <Activity className="h-5 w-5" />
           </div>
-          <span className="clash-grotesk text-lg font-semibold tracking-tight text-foreground">
+          <span className="clash-grotesk text-lg font-bold tracking-tight text-foreground">
             BI Analytics
           </span>
         </div>
-        <span className="flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1.5 text-xs text-primary font-medium border border-primary/20">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
+        <span className="flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1.5 text-xs text-primary font-semibold border border-primary/30">
+          <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-primary" />
           live
         </span>
       </div>
@@ -135,13 +135,13 @@ export default function DataVisual() {
         ].map((kpi) => (
           <div
             key={kpi.label}
-            className="rounded-xl border border-primary/15 bg-gradient-to-br from-black/[0.02] to-black/[0.05] p-4 backdrop-blur hover:border-primary/25 hover:bg-black/[0.06] transition-all"
+            className="rounded-xl border border-primary/25 bg-gradient-to-br from-primary/8 to-primary/3 p-4 backdrop-blur hover:border-primary/40 hover:bg-primary/12 transition-all"
           >
-            <kpi.icon className="mb-2 h-4 w-4 text-primary" />
+            <kpi.icon className="mb-2 h-5 w-5 text-primary" />
             <div className="clash-grotesk text-2xl font-bold tracking-tight text-foreground">
               <LiveNumber value={kpi.value} suffix={kpi.suffix} />
             </div>
-            <div className="text-xs tracking-tight text-muted-foreground font-medium">
+            <div className="text-xs tracking-tight text-muted-foreground font-semibold">
               {kpi.label}
             </div>
           </div>
@@ -149,9 +149,9 @@ export default function DataVisual() {
       </div>
 
       {/* Area chart */}
-      <div className="relative flex-1 rounded-xl border border-primary/15 bg-gradient-to-br from-black/[0.02] to-black/[0.05] p-4 backdrop-blur">
+      <div className="relative flex-1 rounded-xl border border-primary/25 bg-gradient-to-br from-primary/10 to-primary/5 p-4 backdrop-blur">
         <div className="mb-2 flex items-center justify-between">
-          <span className="text-xs tracking-tight text-muted-foreground font-medium">
+          <span className="text-xs tracking-tight text-foreground font-semibold">
             Revenue trend
           </span>
           <span className="clash-grotesk text-gradient text-sm font-bold">
@@ -165,8 +165,8 @@ export default function DataVisual() {
         >
           <defs>
             <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
+              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
             </linearGradient>
           </defs>
           <motion.path
@@ -179,7 +179,7 @@ export default function DataVisual() {
             d={linePath}
             fill="none"
             stroke="hsl(var(--primary))"
-            strokeWidth={3}
+            strokeWidth={4}
             strokeLinecap="round"
             strokeLinejoin="round"
             animate={{ d: linePath }}
@@ -187,7 +187,7 @@ export default function DataVisual() {
           />
           {/* Leading dot */}
           <motion.circle
-            r="4"
+            r="5"
             fill="hsl(var(--primary))"
             animate={{
               cx: CHART_W,
@@ -201,19 +201,19 @@ export default function DataVisual() {
       {/* Bottom row: bars + donut */}
       <div className="relative grid grid-cols-[1.6fr_1fr] gap-3">
         {/* Bar chart */}
-        <div className="rounded-xl border border-primary/15 bg-gradient-to-br from-black/[0.02] to-black/[0.05] p-4 backdrop-blur">
-          <span className="mb-3 block text-xs tracking-tight text-muted-foreground font-medium">
+        <div className="rounded-xl border border-primary/25 bg-gradient-to-br from-primary/10 to-primary/5 p-4 backdrop-blur">
+          <span className="mb-3 block text-xs tracking-tight text-foreground font-semibold">
             Monthly volume
           </span>
           <div className="flex h-[90px] items-end justify-between gap-2">
             {bars.map((h, i) => (
               <div key={i} className="flex flex-1 flex-col items-center gap-1.5">
                 <motion.div
-                  className="w-full rounded-md bg-gradient-to-t from-primary/40 to-primary"
+                  className="w-full rounded-md bg-gradient-to-t from-primary/60 to-primary"
                   animate={{ height: `${h}%` }}
                   transition={{ duration: 0.8, ease }}
                 />
-                <span className="text-xs text-muted-foreground font-medium">
+                <span className="text-xs text-foreground font-semibold">
                   {months[i]}
                 </span>
               </div>
@@ -222,7 +222,7 @@ export default function DataVisual() {
         </div>
 
         {/* Donut */}
-        <div className="flex flex-col items-center justify-center rounded-xl border border-primary/15 bg-gradient-to-br from-black/[0.02] to-black/[0.05] p-4 backdrop-blur">
+        <div className="flex flex-col items-center justify-center rounded-xl border border-primary/25 bg-gradient-to-br from-primary/10 to-primary/5 p-4 backdrop-blur">
           <div className="relative h-[90px] w-[90px]">
             <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
               <circle
@@ -231,8 +231,8 @@ export default function DataVisual() {
                 r="38"
                 fill="none"
                 stroke="hsl(var(--muted))"
-                strokeWidth="9"
-                opacity="0.3"
+                strokeWidth="10"
+                opacity="0.2"
               />
               <motion.circle
                 cx="50"
@@ -240,7 +240,7 @@ export default function DataVisual() {
                 r="38"
                 fill="none"
                 stroke="hsl(var(--primary))"
-                strokeWidth="9"
+                strokeWidth="10"
                 strokeLinecap="round"
                 strokeDasharray={circumference}
                 animate={{ strokeDashoffset: circumference * (1 - donut / 100) }}
@@ -248,12 +248,12 @@ export default function DataVisual() {
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="clash-grotesk text-lg font-bold text-foreground">
+              <span className="clash-grotesk text-2xl font-bold text-foreground">
                 <LiveNumber value={donut} suffix="%" />
               </span>
             </div>
           </div>
-          <span className="mt-2 text-xs tracking-tight text-muted-foreground font-medium">
+          <span className="mt-2 text-xs tracking-tight text-foreground font-semibold">
             KPIs met
           </span>
         </div>
