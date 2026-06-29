@@ -508,18 +508,19 @@ export default function Home() {
                     variants={scaleIn}
                     whileHover={{ y: -6, scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                    className="flex flex-col items-start rounded-md bg-black/[0.04] p-14 shadow-md backdrop-blur hover:bg-black/[0.07] hover:shadow-md"
+                    className="flex flex-col items-start rounded-lg bg-gradient-to-br from-black/[0.02] to-black/[0.08] p-8 shadow-sm backdrop-blur hover:shadow-md transition-all duration-300 border border-primary/10"
                   >
                     <motion.div
-                      whileHover={{ rotate: -8, scale: 1.15 }}
+                      whileHover={{ rotate: -8, scale: 1.2 }}
                       transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                      className="rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 p-4 mb-4"
                     >
-                      <Icon className="my-6 text-primary" size={20} />
+                      <Icon className="text-primary" size={32} />
                     </motion.div>
-                    <span className="text-lg tracking-tight text-foreground">
+                    <span className="text-lg font-semibold tracking-tight text-foreground">
                       {domain.service}
                     </span>
-                    <span className="mt-2 tracking-tighter text-muted-foreground">
+                    <span className="mt-3 text-sm leading-relaxed tracking-tighter text-muted-foreground">
                       {domain.description}
                     </span>
                   </motion.div>
