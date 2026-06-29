@@ -253,15 +253,17 @@ export default function Home() {
             data-scroll
             data-scroll-speed="-.01"
             id={styles["canvas-container"]}
-            className="mt-14 flex h-full w-full flex-col items-center justify-center gap-6 xl:mt-0"
+            className="mt-14 flex h-full w-full flex-col items-center justify-center gap-8 xl:mt-0"
           >
-            <DataVisual />
+            <div className="w-full">
+              <DataVisual />
+            </div>
             <Image
               src="/ia.jpeg"
               alt="Intelligence Artificielle"
-              width={400}
-              height={400}
-              className="h-auto w-full max-w-[360px] rounded-xl object-contain shadow-lg"
+              width={500}
+              height={500}
+              className="h-auto w-full max-w-[420px] rounded-2xl object-contain shadow-2xl border border-primary/10"
               priority
             />
           </div>
