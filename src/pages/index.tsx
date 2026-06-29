@@ -267,7 +267,7 @@ export default function Home() {
             data-scroll
             data-scroll-speed="-.01"
             id={styles["canvas-container"]}
-            className="mt-14 flex h-full w-full flex-col items-center gap-6 xl:mt-0 xl:flex-row xl:justify-center"
+            className="mt-14 flex h-full w-full flex-col items-center justify-center gap-6 xl:mt-0"
           >
             <DataVisual />
             <Image
@@ -381,7 +381,10 @@ export default function Home() {
                         className="clash-grotesk text-gradient shrink-0 text-sm font-semibold"
                       />
                     </div>
-                    <ul className="mt-4 space-y-1.5">
+                    <p className="mt-3 text-sm leading-relaxed tracking-tight text-muted-foreground">
+                      {skill.desc}
+                    </p>
+                    <ul className="mt-4 space-y-1.5 border-t border-foreground/10 pt-4">
                       {tools.map((tool) => (
                         <li
                           key={tool}
