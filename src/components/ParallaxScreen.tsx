@@ -46,9 +46,9 @@ export default function ParallaxScreen() {
         <motion.div style={{ y: contentY, skewY: 3 }} className="relative">
           {/* Fake screen chrome */}
           <div className="mb-6 flex items-center gap-1.5">
-            <span className="h-3 w-3 rounded-full bg-black/30" />
-            <span className="h-3 w-3 rounded-full bg-black/50" />
-            <span className="h-3 w-3 rounded-full bg-black/70" />
+            <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+            <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+            <span className="h-3 w-3 rounded-full bg-[#28c840]" />
             <span className="ml-3 text-xs tracking-tight text-muted-foreground">
               {t.showcase.kicker}
             </span>
