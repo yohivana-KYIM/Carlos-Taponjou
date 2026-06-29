@@ -9,8 +9,6 @@ import {
   BrainCircuit,
   BarChart3,
   Workflow,
-  GraduationCap,
-  Award,
   Download,
   FileText,
   Github,
