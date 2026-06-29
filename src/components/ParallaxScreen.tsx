@@ -36,19 +36,19 @@ export default function ParallaxScreen() {
     >
       <motion.div
         style={{ rotateX, y, opacity, skewY: -3, transformPerspective: 1200 }}
-        className="relative origin-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-primary/25 via-background/60 to-secondary/20 p-8 shadow-2xl shadow-primary/10 backdrop-blur-xl sm:p-12 xl:p-16"
+        className="relative origin-center overflow-hidden rounded-2xl border border-black/10 bg-gradient-to-br from-black/[0.06] via-background/60 to-black/[0.04] p-8 shadow-2xl shadow-black/10 backdrop-blur-xl sm:p-12 xl:p-16"
       >
         {/* Glow accents */}
-        <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-primary/30 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full bg-secondary/30 blur-3xl" />
+        <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-black/[0.06] blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full bg-black/[0.06] blur-3xl" />
 
         {/* Counter-skew so the content stays upright inside the parallelogram */}
         <motion.div style={{ y: contentY, skewY: 3 }} className="relative">
           {/* Fake screen chrome */}
           <div className="mb-6 flex items-center gap-1.5">
-            <span className="h-3 w-3 rounded-full bg-red-400/80" />
-            <span className="h-3 w-3 rounded-full bg-yellow-400/80" />
-            <span className="h-3 w-3 rounded-full bg-green-400/80" />
+            <span className="h-3 w-3 rounded-full bg-black/30" />
+            <span className="h-3 w-3 rounded-full bg-black/50" />
+            <span className="h-3 w-3 rounded-full bg-black/70" />
             <span className="ml-3 text-xs tracking-tight text-muted-foreground">
               {t.showcase.kicker}
             </span>
@@ -66,7 +66,7 @@ export default function ParallaxScreen() {
             {["SQL", "Python", "Power BI", "Azure", "Spark"].map((tech) => (
               <span
                 key={tech}
-                className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm tracking-tight text-foreground"
+                className="rounded-full border border-black/10 bg-black/[0.04] px-4 py-1.5 text-sm tracking-tight text-foreground"
               >
                 {tech}
               </span>

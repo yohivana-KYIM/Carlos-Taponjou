@@ -77,7 +77,7 @@ function LanguageToggle({ className }: { className?: string }) {
       onClick={() => setLang(lang === "fr" ? "en" : "fr")}
       aria-label="Switch language"
       className={cn(
-        "flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm font-medium transition hover:bg-white/10",
+        "flex items-center gap-1 rounded-full border border-black/10 bg-black/[0.04] px-3 py-1 text-sm font-medium transition hover:bg-black/[0.07]",
         className,
       )}
     >
@@ -144,7 +144,7 @@ export default function Container(props: ContainerProps) {
       <Head>
         <title>{meta.title}</title>
         <meta name="robots" content="follow, index" />
-        <meta name="theme-color" content="#7B82FE" />
+        <meta name="theme-color" content="#000000" />
         <meta content={meta.description} name="description" />
         <meta property="og:type" content={meta.type} />
         <meta property="og:site_name" content="Carlos Taponjou" />

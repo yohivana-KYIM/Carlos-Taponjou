@@ -24,10 +24,10 @@ function CloudShape({ size, opacity, blur }: Pick<Cloud, "size" | "opacity" | "b
   return (
     <div className={blur} style={{ width: size, height: h, opacity }}>
       <div className="relative h-full w-full">
-        <span className="absolute bottom-0 left-[8%] h-[60%] w-[55%] rounded-full bg-white" />
-        <span className="absolute bottom-0 left-[28%] h-[100%] w-[45%] rounded-full bg-white" />
-        <span className="absolute bottom-0 left-[50%] h-[75%] w-[45%] rounded-full bg-white" />
-        <span className="absolute bottom-0 left-0 h-[40%] w-full rounded-full bg-white" />
+        <span className="absolute bottom-0 left-[8%] h-[60%] w-[55%] rounded-full bg-neutral-200" />
+        <span className="absolute bottom-0 left-[28%] h-[100%] w-[45%] rounded-full bg-neutral-200" />
+        <span className="absolute bottom-0 left-[50%] h-[75%] w-[45%] rounded-full bg-neutral-200" />
+        <span className="absolute bottom-0 left-0 h-[40%] w-full rounded-full bg-neutral-200" />
       </div>
     </div>
   );
@@ -40,11 +40,11 @@ export default function SkyBackground() {
       className="pointer-events-none fixed inset-0 -z-50 overflow-hidden"
       style={{
         background:
-          "linear-gradient(180deg, hsl(206 75% 24%) 0%, hsl(212 62% 16%) 42%, hsl(220 52% 10%) 78%, hsl(224 50% 7%) 100%)",
+          "linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 0% 97%) 42%, hsl(0 0% 95%) 78%, hsl(0 0% 93%) 100%)",
       }}
     >
-      {/* Soft sun glow */}
-      <div className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-sky-200/20 blur-3xl" />
+      {/* Soft glow */}
+      <div className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-neutral-200/40 blur-3xl" />
 
       {/* Drifting clouds */}
       {clouds.map((cloud, i) => (

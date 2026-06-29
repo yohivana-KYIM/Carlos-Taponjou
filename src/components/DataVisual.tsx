@@ -120,8 +120,8 @@ export default function DataVisual() {
             BI Analytics
           </span>
         </div>
-        <span className="flex items-center gap-1 rounded-full bg-white/5 px-2 py-1 text-[10px] text-muted-foreground">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
+        <span className="flex items-center gap-1 rounded-full bg-black/[0.04] px-2 py-1 text-[10px] text-muted-foreground">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-black" />
           live
         </span>
       </div>
@@ -135,7 +135,7 @@ export default function DataVisual() {
         ].map((kpi) => (
           <div
             key={kpi.label}
-            className="rounded-lg border border-white/5 bg-white/[0.03] p-2.5 backdrop-blur"
+            className="rounded-lg border border-black/10 bg-black/[0.03] p-2.5 backdrop-blur"
           >
             <kpi.icon className="mb-1 h-3.5 w-3.5 text-primary" />
             <div className="clash-grotesk text-lg font-semibold tracking-tight text-foreground">
@@ -149,7 +149,7 @@ export default function DataVisual() {
       </div>
 
       {/* Area chart */}
-      <div className="relative flex-1 rounded-lg border border-white/5 bg-white/[0.03] p-3 backdrop-blur">
+      <div className="relative flex-1 rounded-lg border border-black/10 bg-black/[0.03] p-3 backdrop-blur">
         <div className="mb-1 flex items-center justify-between">
           <span className="text-[10px] tracking-tight text-muted-foreground">
             Revenue trend
@@ -201,7 +201,7 @@ export default function DataVisual() {
       {/* Bottom row: bars + donut */}
       <div className="relative grid grid-cols-[1.6fr_1fr] gap-2">
         {/* Bar chart */}
-        <div className="rounded-lg border border-white/5 bg-white/[0.03] p-3 backdrop-blur">
+        <div className="rounded-lg border border-black/10 bg-black/[0.03] p-3 backdrop-blur">
           <span className="mb-2 block text-[10px] tracking-tight text-muted-foreground">
             Monthly volume
           </span>
@@ -222,7 +222,7 @@ export default function DataVisual() {
         </div>
 
         {/* Donut */}
-        <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-white/[0.03] p-3 backdrop-blur">
+        <div className="flex flex-col items-center justify-center rounded-lg border border-black/10 bg-black/[0.03] p-3 backdrop-blur">
           <div className="relative h-[70px] w-[70px]">
             <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
               <circle

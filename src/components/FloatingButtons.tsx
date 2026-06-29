@@ -42,7 +42,7 @@ export default function FloatingButtons() {
               className="absolute inset-0 rounded-full"
               style={{
                 background:
-                  "conic-gradient(from 0deg, hsl(var(--primary)), hsl(var(--secondary)), #25D366, hsl(var(--primary)))",
+                  "conic-gradient(from 0deg, hsl(0 0% 0%), hsl(0 0% 55%), hsl(0 0% 0%), hsl(0 0% 55%))",
               }}
               animate={{ rotate: 360 }}
               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
@@ -68,7 +68,7 @@ export default function FloatingButtons() {
         transition={{ delay: 0.4, type: "spring", stiffness: 260, damping: 20 }}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/30 transition hover:shadow-xl hover:shadow-[#25D366]/40"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-black text-white shadow-lg shadow-black/30 transition hover:shadow-xl hover:shadow-black/40"
       >
         <WhatsAppIcon />
       </motion.a>

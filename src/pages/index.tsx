@@ -314,7 +314,7 @@ export default function Home() {
                   variants={fadeUp}
                   whileHover={{ y: -4, scale: 1.01 }}
                   transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                  className="flex flex-col rounded-md bg-white/5 p-6 shadow-md backdrop-blur hover:bg-white/10"
+                  className="flex flex-col rounded-md bg-black/[0.04] p-6 shadow-md backdrop-blur hover:bg-black/[0.07]"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-lg tracking-tight text-foreground">
@@ -392,7 +392,7 @@ export default function Home() {
                       className="md:basis-1/2 lg:basis-1/3"
                     >
                       <Card id="tilt" className="h-full">
-                        <CardHeader className="bg-gradient-to-br from-primary/20 to-white/5 p-6">
+                        <CardHeader className="bg-gradient-to-br from-primary/20 to-black/[0.04] p-6">
                           <span className="clash-grotesk text-gradient text-xs font-semibold tracking-tight">
                             {exp.period}
                           </span>
@@ -411,7 +411,7 @@ export default function Home() {
                             {experienceTech[i]?.map((tech) => (
                               <span
                                 key={tech}
-                                className="rounded-full bg-white/5 px-2.5 py-1 text-xs text-muted-foreground"
+                                className="rounded-full bg-black/[0.04] px-2.5 py-1 text-xs text-muted-foreground"
                               >
                                 {tech}
                               </span>
@@ -466,7 +466,7 @@ export default function Home() {
                     variants={scaleIn}
                     whileHover={{ y: -6, scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                    className="flex flex-col items-start rounded-md bg-white/5 p-14 shadow-md backdrop-blur hover:bg-white/10 hover:shadow-md"
+                    className="flex flex-col items-start rounded-md bg-black/[0.04] p-14 shadow-md backdrop-blur hover:bg-black/[0.07] hover:shadow-md"
                   >
                     <motion.div
                       whileHover={{ rotate: -8, scale: 1.15 }}
@@ -524,7 +524,7 @@ export default function Home() {
                     key={item.title}
                     whileHover={{ y: -3 }}
                     transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                    className="rounded-md bg-white/5 p-6 shadow-md backdrop-blur hover:bg-white/10"
+                    className="rounded-md bg-black/[0.04] p-6 shadow-md backdrop-blur hover:bg-black/[0.07]"
                   >
                     <span className="tracking-tight text-foreground">
                       {item.title}
@@ -558,7 +558,7 @@ export default function Home() {
                       key={cert}
                       variants={fadeUp}
                       whileHover={{ x: 4 }}
-                      className="flex items-start rounded-md bg-white/5 px-4 py-3 text-sm tracking-tight text-muted-foreground backdrop-blur hover:bg-white/10"
+                      className="flex items-start rounded-md bg-black/[0.04] px-4 py-3 text-sm tracking-tight text-muted-foreground backdrop-blur hover:bg-black/[0.07]"
                     >
                       <ChevronRight className="mr-2 mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       {cert}
@@ -580,7 +580,7 @@ export default function Home() {
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
-            className="flex flex-col items-center justify-center rounded-lg bg-gradient-to-br from-primary/[6.5%] to-white/5 px-8 py-16 text-center xl:py-24"
+            className="flex flex-col items-center justify-center rounded-lg bg-gradient-to-br from-primary/[6.5%] to-black/[0.04] px-8 py-16 text-center xl:py-24"
           >
             <h2 className="text-4xl font-medium tracking-tighter xl:text-6xl">
               {t.contact.title}
@@ -636,8 +636,8 @@ function Gradient() {
               y2="474.645"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor="#7980fe" />
-              <stop offset={1} stopColor="#f0fff7" />
+              <stop stopColor="#000000" />
+              <stop offset={1} stopColor="#cccccc" />
             </linearGradient>
           </defs>
         </svg>
@@ -663,8 +663,8 @@ function Gradient() {
               y2="474.645"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor="#9A70FF" />
-              <stop offset={1} stopColor="#838aff" />
+              <stop stopColor="#000000" />
+              <stop offset={1} stopColor="#cccccc" />
             </linearGradient>
           </defs>
         </svg>
