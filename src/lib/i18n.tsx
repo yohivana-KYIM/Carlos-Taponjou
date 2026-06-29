@@ -9,7 +9,7 @@ import {
 export type Lang = "fr" | "en";
 
 type Stat = { label: string; value: string };
-type Skill = { category: string; items: string; years: string };
+type Skill = { category: string; desc: string; items: string; years: string };
 type Experience = {
   role: string;
   company: string;
