@@ -215,8 +215,12 @@ export default function Home() {
                 rel="noopener noreferrer"
                 aria-label="GitHub"
               >
-                <Button variant="outline" size="icon">
-                  <Github className="h-4 w-4" />
+                <Button 
+                  variant="outline" 
+                  size="icon"
+                  className="hover:bg-[#1F2937]/10 hover:border-[#1F2937]"
+                >
+                  <Github className="h-4 w-4 text-[#1F2937] dark:text-white" />
                 </Button>
               </Link>
               <Link
@@ -225,8 +229,12 @@ export default function Home() {
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
               >
-                <Button variant="outline" size="icon">
-                  <Linkedin className="h-4 w-4" />
+                <Button 
+                  variant="outline" 
+                  size="icon"
+                  className="hover:bg-[#0A66C2]/10 hover:border-[#0A66C2]"
+                >
+                  <Linkedin className="h-4 w-4 text-[#0A66C2]" />
                 </Button>
               </Link>
             </span>
