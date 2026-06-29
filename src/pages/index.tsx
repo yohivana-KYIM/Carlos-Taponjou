@@ -13,6 +13,8 @@ import {
   Award,
   Download,
   FileText,
+  Github,
+  Linkedin,
 } from "lucide-react";
 import { TriangleDownIcon } from "@radix-ui/react-icons";
 import DataVisual from "@/components/DataVisual";
@@ -204,6 +206,33 @@ export default function Home() {
                 </Button>
               </a>
             </span>
+            <span
+              data-scroll
+              data-scroll-enable-touch-speed
+              data-scroll-speed=".06"
+              className="flex flex-row flex-wrap items-center gap-2 pt-3"
+            >
+              <Link
+                href="https://github.com/taponjou"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+              >
+                <Button variant="outline" size="icon">
+                  <Github className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link
+                href="https://www.linkedin.com/in/carlos-taponjou-bb58929b/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <Button variant="outline" size="icon">
+                  <Linkedin className="h-4 w-4" />
+                </Button>
+              </Link>
+            </span>
 
             <div
               className={cn(
@@ -223,7 +252,7 @@ export default function Home() {
           >
             <DataVisual />
             <Image
-              src="/ia.png"
+              src="/ia.jpeg"
               alt="Intelligence Artificielle"
               width={300}
               height={300}
