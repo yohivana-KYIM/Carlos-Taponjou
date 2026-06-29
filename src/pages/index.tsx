@@ -27,14 +27,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn, scrollTo } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from "@/components/ui/carousel";
 import VanillaTilt from "vanilla-tilt";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n";
@@ -80,9 +72,6 @@ const experienceTech = [
 export default function Home() {
   const refScrollContainer = useRef(null);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
-  const [current, setCurrent] = useState<number>(0);
-  const [count, setCount] = useState<number>(0);
   const { t } = useLanguage();
 
   // handle scroll
@@ -125,17 +114,6 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    if (!carouselApi) return;
-
-    setCount(carouselApi.scrollSnapList().length);
-    setCurrent(carouselApi.selectedScrollSnap() + 1);
-
-    carouselApi.on("select", () => {
-      setCurrent(carouselApi.selectedScrollSnap() + 1);
-    });
-  }, [carouselApi]);
 
   // card hover effect
   useEffect(() => {
@@ -450,69 +428,50 @@ export default function Home() {
               {t.experience.subtitle}
             </motion.p>
 
-            {/* Carousel */}
+            {/* Mandats Grid */}
             <motion.div variants={fadeUp} className="mt-14">
-              <Carousel
-                setApi={setCarouselApi}
-                className="w-full"
-                opts={{ align: "start", containScroll: false }}
-              >
-                <CarouselContent>
-                  {t.experience.items.map((exp, i) => (
-                    <CarouselItem
-                      key={exp.company}
-                      className="md:basis-1/2 lg:basis-1/3"
-                    >
-                      <Card id="tilt" className="h-full">
-                        <CardHeader className="bg-gradient-to-br from-primary/20 to-black/[0.04] p-6">
-                          <span className="clash-grotesk text-gradient text-xs font-semibold tracking-tight">
-                            {exp.period}
+              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {t.experience.items.map((exp, i) => (
+                  <Card key={exp.company} id="tilt" className="h-full">
+                    <CardHeader className="bg-gradient-to-br from-primary/20 to-black/[0.04] p-6">
+                      <span className="clash-grotesk text-gradient text-xs font-semibold tracking-tight">
+                        {exp.period}
+                      </span>
+                      <CardTitle className="mt-2 text-lg font-medium tracking-tight">
+                        {exp.role}
+                      </CardTitle>
+                      <span className="text-sm text-muted-foreground">
+                        {exp.company} · {exp.location}
+                      </span>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                      <p className="text-sm font-medium tracking-tight text-foreground">
+                        {exp.project}
+                      </p>
+                      <ul className="mt-4 space-y-2">
+                        {exp.highlights.map((h) => (
+                          <li
+                            key={h}
+                            className="flex items-start gap-2 text-sm leading-snug tracking-tight text-muted-foreground"
+                          >
+                            <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60" />
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-4 flex flex-wrap gap-1.5 border-t border-foreground/10 pt-4">
+                        {experienceTech[i]?.map((tech) => (
+                          <span
+                            key={tech}
+                            className="rounded-full bg-black/[0.04] px-2.5 py-1 text-xs text-muted-foreground"
+                          >
+                            {tech}
                           </span>
-                          <CardTitle className="mt-2 text-lg font-medium tracking-tight">
-                            {exp.role}
-                          </CardTitle>
-                          <span className="text-sm text-muted-foreground">
-                            {exp.company} · {exp.location}
-                          </span>
-                        </CardHeader>
-                        <CardContent className="p-6">
-                          <p className="text-sm font-medium tracking-tight text-foreground">
-                            {exp.project}
-                          </p>
-                          <ul className="mt-4 space-y-2">
-                            {exp.highlights.map((h) => (
-                              <li
-                                key={h}
-                                className="flex items-start gap-2 text-sm leading-snug tracking-tight text-muted-foreground"
-                              >
-                                <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60" />
-                                {h}
-                              </li>
-                            ))}
-                          </ul>
-                          <div className="mt-4 flex flex-wrap gap-1.5 border-t border-foreground/10 pt-4">
-                            {experienceTech[i]?.map((tech) => (
-                              <span
-                                key={tech}
-                                className="rounded-full bg-black/[0.04] px-2.5 py-1 text-xs text-muted-foreground"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-              </Carousel>
-              <div className="py-2 text-center text-sm text-muted-foreground">
-                <span className="font-semibold">
-                  {current} / {count}
-                </span>{" "}
-                {t.experience.counter}
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </motion.div>
           </motion.div>
