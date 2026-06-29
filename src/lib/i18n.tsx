@@ -16,6 +16,7 @@ type Experience = {
   period: string;
   location: string;
   project: string;
+  highlights: string[];
 };
 type Domain = { service: string; description: string };
 type Education = { title: string; place: string };
@@ -128,11 +129,11 @@ export const translations: Record<Lang, Dict> = {
         "J'ai accompagné des organisations humanitaires et institutionnelles à travers l'Afrique. Voici quelques-uns de mes mandats :",
       counter: "mandats",
       items: [
-        { role: "Développeur Business Intelligence", company: "International Council for Voluntary Agencies (ICVA)", period: "Nov. 2024 – Fév. 2025 · 5 mois", location: "Sénégal", project: "Baromètre de localisation de l'aide humanitaire" },
-        { role: "Analyste de données", company: "Impact-Initiatives", period: "Sep. 2022 – Sep. 2024 · 24 mois", location: "République Centrafricaine, Uganda", project: "Évaluation multisectorielle des besoins de population (OCHA)" },
-        { role: "Analyste de données", company: "iMMAP", period: "Avr. 2022 – Jui. 2022 · 3 mois", location: "Cameroun", project: "Renforcement des capacités techniques en gestion de l'information (OCHA)" },
-        { role: "Analyste de données", company: "INTERSOS", period: "Sep. 2019 – Fév. 2022 · 31 mois", location: "Cameroun", project: "Assistance aux personnes victimes de catastrophes et de conflits armés (OCHA, ECHO)" },
-        { role: "Analyste de données", company: "Ministère de l'Élevage et de l'Agriculture", period: "Oct. 2016 – Fév. 2019 · 29 mois", location: "Cameroun", project: "Recensement Général de l'Agriculture et de l'Élevage (RGAE)" },
+        { role: "Développeur Business Intelligence", company: "International Council for Voluntary Agencies (ICVA)", period: "Nov. 2024 – Fév. 2025 · 5 mois", location: "Sénégal", project: "Baromètre de localisation de l'aide humanitaire (financement USAID)", highlights: ["Intégration de données hétérogènes (API, bases relationnelles, fichiers plats) avec harmonisation des formats", "Mise en place de pipelines ETL/ELT automatisés, résilients et monitorables", "Définition et contextualisation des KPI par pays et tableaux de bord Power BI dynamiques"] },
+        { role: "Analyste de données", company: "Impact-Initiatives", period: "Sep. 2022 – Sep. 2024 · 24 mois", location: "République Centrafricaine, Uganda", project: "Évaluation multisectorielle des besoins de population (OCHA)", highlights: ["Développement d'un entrepôt de données et de processus ETL/ELT automatisés", "Tables de dimensions et de faits, solutions BI (rapports, cubes, dashboards)", "Contrôles qualité automatisés et point focal de l'analyse statistique"] },
+        { role: "Analyste de données", company: "iMMAP", period: "Avr. 2022 – Jui. 2022 · 3 mois", location: "Cameroun", project: "Renforcement des capacités techniques en gestion de l'information (OCHA)", highlights: ["Conception de schémas multidimensionnels et d'entrepôts de données", "Développement d'ETL/ELT et documentation des flux et du catalogue de données", "Contrôles qualité et détection d'anomalies automatisés"] },
+        { role: "Analyste de données", company: "INTERSOS", period: "Sep. 2019 – Fév. 2022 · 31 mois", location: "Cameroun", project: "Assistance aux personnes victimes de catastrophes et de conflits armés (OCHA, ECHO)", highlights: ["Maintenance et développement des entrepôts de données et des pipelines ETL/ELT", "Amélioration continue des systèmes analytiques", "Rapports statistiques et visualisations interactives pour la prise de décision"] },
+        { role: "Analyste de données", company: "Ministère de l'Élevage et de l'Agriculture", period: "Oct. 2016 – Fév. 2019 · 29 mois", location: "Cameroun", project: "Recensement Général de l'Agriculture et de l'Élevage (RGAE)", highlights: ["Solutions de gestion et d'analyse des données du recensement", "Outils de collecte, échantillonnage et plan d'analyse des données", "Supervision de la collecte, nettoyage et produits d'analyse (cartes web, dashboards)"] },
       ],
     },
     showcase: {
