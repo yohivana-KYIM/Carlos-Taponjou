@@ -452,7 +452,11 @@ export default function Home() {
 
             {/* Carousel */}
             <motion.div variants={fadeUp} className="mt-14">
-              <Carousel setApi={setCarouselApi} className="w-full">
+              <Carousel
+                setApi={setCarouselApi}
+                className="w-full"
+                opts={{ align: "start", containScroll: false }}
+              >
                 <CarouselContent>
                   {t.experience.items.map((exp, i) => (
                     <CarouselItem
