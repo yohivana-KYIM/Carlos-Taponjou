@@ -59,13 +59,15 @@ function NavItem(props: NavProps) {
       animate="visible"
       exit="hidden"
     >
-      <a
+      <motion.a
         href={props.href}
         onClick={handleClick}
         className={cn(props.i === 0 && "nav-active", "nav-link")}
+        whileHover={{ y: -2 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         {props.text}
-      </a>
+      </motion.a>
     </motion.li>
   );
 }
