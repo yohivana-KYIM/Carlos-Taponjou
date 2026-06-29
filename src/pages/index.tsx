@@ -254,9 +254,9 @@ export default function Home() {
             <Image
               src="/ia.jpeg"
               alt="Intelligence Artificielle"
-              width={300}
-              height={300}
-              className="h-auto w-full max-w-[300px] rounded-xl object-contain shadow-lg"
+              width={400}
+              height={400}
+              className="h-auto w-full max-w-[360px] rounded-xl object-contain shadow-lg"
               priority
             />
           </div>
