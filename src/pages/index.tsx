@@ -430,9 +430,9 @@ export default function Home() {
 
             {/* Mandats Grid */}
             <motion.div variants={fadeUp} className="mt-14">
-              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-max">
                 {t.experience.items.map((exp, i) => (
-                  <Card key={exp.company} id="tilt" className="h-full">
+                  <Card key={exp.company} className="h-full flex flex-col">
                     <CardHeader className="bg-gradient-to-br from-primary/20 to-black/[0.04] p-6">
                       <span className="clash-grotesk text-gradient text-xs font-semibold tracking-tight">
                         {exp.period}
@@ -444,11 +444,11 @@ export default function Home() {
                         {exp.company} · {exp.location}
                       </span>
                     </CardHeader>
-                    <CardContent className="p-6">
+                    <CardContent className="p-6 flex-1 flex flex-col">
                       <p className="text-sm font-medium tracking-tight text-foreground">
                         {exp.project}
                       </p>
-                      <ul className="mt-4 space-y-2">
+                      <ul className="mt-4 space-y-2 flex-1">
                         {exp.highlights.map((h) => (
                           <li
                             key={h}
