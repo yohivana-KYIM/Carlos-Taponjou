@@ -539,7 +539,7 @@ export default function Home() {
                 <h2 className="text-4xl font-medium tracking-tight">
                   {t.domains.title}
                 </h2>
-                <p className="mt-2 tracking-tighter text-secondary-foreground">
+                <p className="mt-2 tracking-tighter text-black">
                   {t.domains.subtitle}
                 </p>
               </motion.div>

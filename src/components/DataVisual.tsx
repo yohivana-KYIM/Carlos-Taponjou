@@ -38,15 +38,14 @@ function LiveNumber({
   );
 }
 
-const CHART_W = 300;
-const CHART_H = 110;
-
-// Build an SVG line path from an array of values (0–100)
-function buildLine(values: number[]) {
+// Build an SVG line path from an array of values (0–100), in real pixel
+// coordinates so the SVG viewBox matches the container 1:1 (no distortion).
+function buildLine(values: number[], w: number, h: number) {
+  const pad = 5;
   return values
     .map((v, i) => {
-      const x = (i * CHART_W) / (values.length - 1);
-      const y = CHART_H - 5 - (v / 100) * (CHART_H - 15);
+      const x = (i * w) / (values.length - 1);
+      const y = h - pad - (v / 100) * (h - 3 * pad);
       return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
     })
     .join(" ");
