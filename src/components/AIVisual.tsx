@@ -46,7 +46,7 @@ const signals: P[][] = [
 // Crisp, animated neural-network illustration, styled to match DataVisual.
 export default function AIVisual() {
   return (
-    <div className="relative flex w-full flex-col gap-4 overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-background via-primary/5 to-background p-8 shadow-2xl backdrop-blur-sm">
+    <div className="relative flex w-full flex-col gap-4 overflow-hidden rounded-2xl bg-gradient-to-br from-background via-primary/5 to-background p-8 shadow-2xl backdrop-blur-sm">
       {/* Animated grid background */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.12]"
@@ -66,21 +66,21 @@ export default function AIVisual() {
       {/* Header */}
       <div className="relative flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/20 bg-gradient-to-br from-primary/30 to-primary/15 text-primary">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary/30 to-primary/15 text-primary">
             <BrainCircuit className="h-5 w-5" />
           </div>
           <span className="clash-grotesk text-lg font-bold tracking-tight text-foreground">
             Machine Learning
           </span>
         </div>
-        <span className="flex items-center gap-2 rounded-full border border-primary/30 bg-primary/15 px-3 py-1.5 text-xs font-semibold text-primary">
+        <span className="flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1.5 text-xs font-semibold text-primary">
           <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-primary" />
           inference
         </span>
       </div>
 
       {/* Network */}
-      <div className="relative rounded-xl border border-primary/25 bg-gradient-to-br from-primary/10 to-primary/5 p-4 backdrop-blur">
+      <div className="relative rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 p-4 backdrop-blur">
         <svg viewBox="0 0 220 150" className="h-[180px] w-full">
           {/* connections */}
           {edges.map((e, i) => (
@@ -152,7 +152,7 @@ export default function AIVisual() {
         {["Random Forest", "LSTM", "Classification", "Régression"].map((tag) => (
           <span
             key={tag}
-            className="rounded-full border border-primary/20 bg-primary/8 px-3 py-1 text-xs font-medium tracking-tight text-muted-foreground"
+            className="rounded-full bg-primary/8 px-3 py-1 text-xs font-medium tracking-tight text-muted-foreground"
           >
             {tag}
           </span>

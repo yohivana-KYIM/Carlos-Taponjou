@@ -71,7 +71,7 @@ export default function DataVisual() {
   const circumference = 2 * Math.PI * 38;
 
   return (
-    <div className="relative flex w-full flex-col gap-4 overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-background via-primary/5 to-background p-8 shadow-2xl backdrop-blur-sm">
+    <div className="relative flex w-full flex-col gap-4 overflow-hidden rounded-2xl bg-gradient-to-br from-background via-primary/5 to-background p-8 shadow-2xl backdrop-blur-sm">
       {/* Animated grid background */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.12]"
@@ -91,14 +91,14 @@ export default function DataVisual() {
       {/* Header */}
       <div className="relative flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary/30 to-primary/15 text-primary border border-primary/20">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary/30 to-primary/15 text-primary">
             <Activity className="h-5 w-5" />
           </div>
           <span className="clash-grotesk text-lg font-bold tracking-tight text-foreground">
             BI Analytics
           </span>
         </div>
-        <span className="flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1.5 text-xs text-primary font-semibold border border-primary/30">
+        <span className="flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1.5 text-xs text-primary font-semibold">
           <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-primary" />
           live
         </span>
@@ -113,7 +113,7 @@ export default function DataVisual() {
         ].map((kpi) => (
           <div
             key={kpi.label}
-            className="rounded-xl border border-primary/25 bg-gradient-to-br from-primary/8 to-primary/3 p-4 backdrop-blur hover:border-primary/40 hover:bg-primary/12 transition-all"
+            className="rounded-xl bg-gradient-to-br from-primary/8 to-primary/3 p-4 backdrop-blur hover:bg-primary/12 transition-all"
           >
             <kpi.icon className="mb-2 h-5 w-5 text-primary" />
             <div className="clash-grotesk text-2xl font-bold tracking-tight text-foreground">
@@ -129,7 +129,7 @@ export default function DataVisual() {
       {/* Bottom row: bars + donut */}
       <div className="relative grid grid-cols-[1.6fr_1fr] gap-3">
         {/* Bar chart */}
-        <div className="rounded-xl border border-primary/25 bg-gradient-to-br from-primary/10 to-primary/5 p-4 backdrop-blur">
+        <div className="rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 p-4 backdrop-blur">
           <span className="mb-3 block text-xs tracking-tight text-foreground font-semibold">
             Monthly volume
           </span>
@@ -150,7 +150,7 @@ export default function DataVisual() {
         </div>
 
         {/* Donut */}
-        <div className="flex flex-col items-center justify-center rounded-xl border border-primary/25 bg-gradient-to-br from-primary/10 to-primary/5 p-4 backdrop-blur">
+        <div className="flex flex-col items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 p-4 backdrop-blur">
           <div className="relative h-[90px] w-[90px]">
             <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
               <circle
