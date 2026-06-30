@@ -185,11 +185,7 @@ export default function Container(props: ContainerProps) {
             <CrossIcon data-hide={!isOpen} />
           </button>
         </div>
-        <Link href="/">
-          <span className="flex h-14 w-14 items-center justify-center rounded-full border border-black/10 bg-gradient-to-br from-primary/20 to-primary/10 text-sm font-semibold tracking-tight text-foreground shadow-sm">
-            CG
-          </span>
-        </Link>
+        <Link href="/" aria-label="Accueil" className="block h-7 w-7" />
 
         {/* Desktop menu */}
         <div className="hidden items-center gap-6 sm:flex">
