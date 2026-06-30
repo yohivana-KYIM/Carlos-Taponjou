@@ -38,52 +38,18 @@ function LiveNumber({
   );
 }
 
-// Build an SVG line path from an array of values (0–100), in real pixel
-// coordinates so the SVG viewBox matches the container 1:1 (no distortion).
-function buildLine(values: number[], w: number, h: number) {
-  const pad = 5;
-  return values
-    .map((v, i) => {
-      const x = (i * w) / (values.length - 1);
-      const y = h - pad - (v / 100) * (h - 3 * pad);
-      return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
-    })
-    .join(" ");
-}
-
 const months = ["J", "F", "M", "A", "M", "J", "J", "A"];
 
 export default function DataVisual() {
   const [bars, setBars] = useState([42, 68, 55, 82, 60, 95, 74, 88]);
-  const [line, setLine] = useState([30, 48, 40, 70, 58, 82, 72, 90]);
   const [donut, setDonut] = useState(72);
   const [kpis, setKpis] = useState({ datasets: 128, growth: 24, accuracy: 98 });
-
-  // Measure the chart area so the SVG renders at its real pixel size
-  const chartRef = useRef<HTMLDivElement>(null);
-  const [size, setSize] = useState({ w: 300, h: 110 });
-
-  useEffect(() => {
-    const el = chartRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([entry]) => {
-      if (!entry) return;
-      const { width, height } = entry.contentRect;
-      if (width > 0 && height > 0) setSize({ w: width, h: height });
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
 
   // Live, automatic updates
   useEffect(() => {
     const barTimer = setInterval(() => {
       setBars((b) => b.map(() => rnd(30, 100)));
     }, 1800);
-
-    const lineTimer = setInterval(() => {
-      setLine((l) => [...l.slice(1), rnd(20, 95)]);
-    }, 2000);
 
     const donutTimer = setInterval(() => setDonut(rnd(58, 92)), 2600);
 
@@ -97,19 +63,15 @@ export default function DataVisual() {
 
     return () => {
       clearInterval(barTimer);
-      clearInterval(lineTimer);
       clearInterval(donutTimer);
       clearInterval(kpiTimer);
     };
   }, []);
 
   const circumference = 2 * Math.PI * 38;
-  const linePath = buildLine(line, size.w, size.h);
-  const areaPath = `${linePath} L${size.w},${size.h} L0,${size.h} Z`;
-  const lastY = size.h - 5 - ((line[line.length - 1] ?? 0) / 100) * (size.h - 15);
 
   return (
-    <div className="relative flex h-full min-h-[650px] w-full flex-col gap-4 overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-background via-primary/5 to-background p-8 shadow-2xl backdrop-blur-sm">
+    <div className="relative flex w-full flex-col gap-4 overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-background via-primary/5 to-background p-8 shadow-2xl backdrop-blur-sm">
       {/* Animated grid background */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.12]"
@@ -162,54 +124,6 @@ export default function DataVisual() {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Area chart */}
-      <div className="relative flex-1 rounded-xl border border-primary/25 bg-gradient-to-br from-primary/10 to-primary/5 p-4 backdrop-blur">
-        <div className="mb-2 flex items-center justify-between">
-          <span className="text-xs tracking-tight text-foreground font-semibold">
-            Revenue trend
-          </span>
-          <span className="clash-grotesk text-gradient text-sm font-bold">
-            ↑ <LiveNumber value={kpis.growth + 8} suffix="%" />
-          </span>
-        </div>
-        <div ref={chartRef} className="h-[calc(100%-24px)] w-full">
-          <svg
-            viewBox={`0 0 ${size.w} ${size.h}`}
-            className="h-full w-full"
-          >
-            <defs>
-              <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
-              </linearGradient>
-            </defs>
-            <motion.path
-              d={areaPath}
-              fill="url(#areaFill)"
-              animate={{ d: areaPath }}
-              transition={{ duration: 0.9, ease }}
-            />
-            <motion.path
-              d={linePath}
-              fill="none"
-              stroke="hsl(var(--primary))"
-              strokeWidth={3}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              animate={{ d: linePath }}
-              transition={{ duration: 0.9, ease }}
-            />
-            {/* Leading dot */}
-            <motion.circle
-              r="5"
-              fill="hsl(var(--primary))"
-              animate={{ cx: size.w, cy: lastY }}
-              transition={{ duration: 0.9, ease }}
-            />
-          </svg>
-        </div>
       </div>
 
       {/* Bottom row: bars + donut */}
