@@ -105,7 +105,6 @@ export default function Container(props: ContainerProps) {
     { href: "#about", text: t.nav.about },
     { href: "#skills", text: t.nav.skills },
     { href: "#experience", text: t.nav.experience },
-    { href: "#education", text: t.nav.education },
     { href: "#contact", text: t.nav.contact },
   ];
 

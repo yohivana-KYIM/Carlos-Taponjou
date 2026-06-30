@@ -33,7 +33,6 @@ import ParallaxScreen from "@/components/ParallaxScreen";
 import {
   fadeUp,
   scaleIn,
-  fadeSide,
   staggerContainer,
   staggerFast,
   viewport,
@@ -563,8 +562,6 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
-
-        {/* Education section removed per request */}
 
         {/* Contact */}
         <section id="contact" data-scroll-section className="my-64">
