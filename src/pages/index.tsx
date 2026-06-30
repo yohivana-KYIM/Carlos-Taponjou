@@ -261,7 +261,7 @@ export default function Home() {
             data-scroll
             data-scroll-speed="-.01"
             id={styles["canvas-container"]}
-            className="mt-14 flex h-full w-full flex-col items-center justify-center gap-8 xl:mt-0"
+            className="mt-14 flex w-full flex-col items-center justify-start gap-8 xl:mt-0"
           >
             <div className="w-full">
               <DataVisual />
