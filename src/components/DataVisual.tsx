@@ -59,6 +59,22 @@ export default function DataVisual() {
   const [donut, setDonut] = useState(72);
   const [kpis, setKpis] = useState({ datasets: 128, growth: 24, accuracy: 98 });
 
+  // Measure the chart area so the SVG renders at its real pixel size
+  const chartRef = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState({ w: 300, h: 110 });
+
+  useEffect(() => {
+    const el = chartRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      if (!entry) return;
+      const { width, height } = entry.contentRect;
+      if (width > 0 && height > 0) setSize({ w: width, h: height });
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   // Live, automatic updates
   useEffect(() => {
     const barTimer = setInterval(() => {
@@ -88,8 +104,9 @@ export default function DataVisual() {
   }, []);
 
   const circumference = 2 * Math.PI * 38;
-  const linePath = buildLine(line);
-  const areaPath = `${linePath} L${CHART_W},${CHART_H} L0,${CHART_H} Z`;
+  const linePath = buildLine(line, size.w, size.h);
+  const areaPath = `${linePath} L${size.w},${size.h} L0,${size.h} Z`;
+  const lastY = size.h - 5 - ((line[line.length - 1] ?? 0) / 100) * (size.h - 15);
 
   return (
     <div className="relative flex h-full min-h-[650px] w-full flex-col gap-4 overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-background via-primary/5 to-background p-8 shadow-2xl backdrop-blur-sm">
@@ -157,44 +174,42 @@ export default function DataVisual() {
             ↑ <LiveNumber value={kpis.growth + 8} suffix="%" />
           </span>
         </div>
-        <svg
-          viewBox={`0 0 ${CHART_W} ${CHART_H}`}
-          preserveAspectRatio="none"
-          className="h-[calc(100%-24px)] w-full"
-        >
-          <defs>
-            <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
-            </linearGradient>
-          </defs>
-          <motion.path
-            d={areaPath}
-            fill="url(#areaFill)"
-            animate={{ d: areaPath }}
-            transition={{ duration: 0.9, ease }}
-          />
-          <motion.path
-            d={linePath}
-            fill="none"
-            stroke="hsl(var(--primary))"
-            strokeWidth={4}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            animate={{ d: linePath }}
-            transition={{ duration: 0.9, ease }}
-          />
-          {/* Leading dot */}
-          <motion.circle
-            r="5"
-            fill="hsl(var(--primary))"
-            animate={{
-              cx: CHART_W,
-              cy: CHART_H - 5 - ((line[line.length - 1] ?? 0) / 100) * (CHART_H - 15),
-            }}
-            transition={{ duration: 0.9, ease }}
-          />
-        </svg>
+        <div ref={chartRef} className="h-[calc(100%-24px)] w-full">
+          <svg
+            viewBox={`0 0 ${size.w} ${size.h}`}
+            className="h-full w-full"
+          >
+            <defs>
+              <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
+              </linearGradient>
+            </defs>
+            <motion.path
+              d={areaPath}
+              fill="url(#areaFill)"
+              animate={{ d: areaPath }}
+              transition={{ duration: 0.9, ease }}
+            />
+            <motion.path
+              d={linePath}
+              fill="none"
+              stroke="hsl(var(--primary))"
+              strokeWidth={3}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              animate={{ d: linePath }}
+              transition={{ duration: 0.9, ease }}
+            />
+            {/* Leading dot */}
+            <motion.circle
+              r="5"
+              fill="hsl(var(--primary))"
+              animate={{ cx: size.w, cy: lastY }}
+              transition={{ duration: 0.9, ease }}
+            />
+          </svg>
+        </div>
       </div>
 
       {/* Bottom row: bars + donut */}
