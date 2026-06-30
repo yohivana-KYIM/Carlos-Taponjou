@@ -138,6 +138,16 @@ export default function Home() {
         >
           <div className={styles.intro}>
             <div>
+              <div className="mb-6 flex justify-start">
+                <Image
+                  src="/carlos.jpeg"
+                  alt="Carlos Gael Taponjou Kenfack"
+                  width={240}
+                  height={240}
+                  className="h-56 w-56 rounded-full border-4 border-primary/20 object-cover shadow-2xl shadow-primary/10 sm:h-64 sm:w-64"
+                  priority
+                />
+              </div>
               <h1
                 data-scroll
                 data-scroll-enable-touch-speed
