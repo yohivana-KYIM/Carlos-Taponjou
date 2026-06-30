@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { TriangleDownIcon } from "@radix-ui/react-icons";
 import DataVisual from "@/components/DataVisual";
+import AIVisual from "@/components/AIVisual";
 import Image from "next/image";
 import Link from "next/link";
 import { cn, scrollTo } from "@/lib/utils";
@@ -264,6 +265,9 @@ export default function Home() {
           >
             <div className="w-full">
               <DataVisual />
+            </div>
+            <div className="w-full">
+              <AIVisual />
             </div>
           </div>
         </section>
