@@ -170,7 +170,7 @@ export default function Container(props: ContainerProps) {
             : "bg-transparent",
         )}
       >
-        <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
+        <div className="absolute inset-y-0 right-0 flex items-center lg:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={cn(
@@ -188,7 +188,7 @@ export default function Container(props: ContainerProps) {
         <Link href="/" aria-label="Accueil" className="block h-7 w-7" />
 
         {/* Desktop menu */}
-        <div className="hidden items-center gap-6 sm:flex">
+        <div className="hidden items-center gap-6 lg:flex">
           <ul className={styles["desktop-nav"]}>
             {navLinks.map((link, i) => (
               <NavItem
@@ -204,7 +204,7 @@ export default function Container(props: ContainerProps) {
         </div>
 
         {/* Mobile language toggle */}
-        <div className="absolute right-16 top-1/2 -translate-y-1/2 sm:hidden">
+        <div className="absolute right-16 top-1/2 -translate-y-1/2 lg:hidden">
           <LanguageToggle />
         </div>
 
@@ -287,7 +287,7 @@ function MenuIcon(props: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute h-5 w-5 text-neutral-100"
+      className="absolute h-6 w-6 text-foreground"
       width="20"
       height="20"
       viewBox="0 0 20 20"
@@ -322,7 +322,7 @@ function MenuIcon(props: IconProps) {
 function CrossIcon(props: IconProps) {
   return (
     <svg
-      className="absolute h-5 w-5 text-neutral-100"
+      className="absolute h-6 w-6 text-foreground"
       viewBox="0 0 24 24"
       width="24"
       height="24"
